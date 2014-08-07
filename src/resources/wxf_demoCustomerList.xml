@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:my="http://www.example.org/customer"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2002/xforms http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd
+	                    http://www.example.org/Wicket-XForms Wicket-XForms.xsd
+						http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
+
+	<!-- Der head enthaelt Elemente, die nicht zur Benutzeroberfläche gehören -->
+	<wxf:head>
+	
+		<model>
+			<instance>
+				<!-- Beispieldaten, werden durch die init-action überschrieben -->
+				<my:data>
+					<my:customer name="Arthur Dent" unmarried="true">
+						<my:email>hitchhiker@towel.co.uk</my:email>
+						<my:address city="Stadt" street="Straße" zip="1234"/>
+					</my:customer>
+				</my:data>
+			</instance>
+			
+			<!-- Angabe von Datentypen (model item properties) -->
+			<bind nodeset="my:customer/@unmarried" type="xsd:boolean"/>
+			
+			<!-- Daten im Backend initialisieren und danach rebuild anstoßen -->
+			<action ev:event="xforms-model-construct-done">
+				<wxf:action name="initCustomerData"/>
+				<rebuild/>
+			</action>
+		</model>
+		
+	</wxf:head>
+	
+	<!-- Im body sind die Elemente für Benutzerinteraktionen -->
+	<wxf:body>
+	
+		<group wxf:class="styled-group">
+			<label>Kunden im System:</label>
+			
+			<repeat nodeset="my:customer">
+			
+				<group appearance="full" wxf:style="display: inline-block;">
+					<label>Stammdaten</label>
+					
+					<output ref="@name"/>
+					<output ref="@unmarried"/>
+					<output ref="my:email"/>
+				</group>
+				
+				<group appearance="full" wxf:style="display: inline-block;" ref="my:address">
+					<label>Addresse</label>
+					
+					<output ref="@zip"/>
+					<output ref="@city"/>
+					<output ref="@street"/>
+				</group>
+			</repeat>
+		</group>
+      
+	</wxf:body>
+</wxf:wicketxforms>

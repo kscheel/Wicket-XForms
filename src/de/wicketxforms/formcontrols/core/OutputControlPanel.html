@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="https://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+
+<body>
+	<wicket:panel>
+		<span wicket:id="output"></span>
+		
+		<wicket:remove>
+			<!-- the markup of one of the following fragments will be used in the span above -->
+		</wicket:remove>
+		
+		<wicket:fragment wicket:id="outputFragment_noLabel_string">
+			<span wicket:id="outputValue"></span>
+		</wicket:fragment>
+		
+		<wicket:fragment wicket:id="outputFragment_withLabel_string">
+			<span wicket:id="label"></span>
+			<span wicket:id="outputValue"></span>
+		</wicket:fragment>
+		
+		<wicket:fragment wicket:id="outputFragment_noLabel_boolean">
+			<input type="checkbox" wicket:id="outputValue"/>
+		</wicket:fragment>
+		
+		<wicket:fragment wicket:id="outputFragment_withLabel_boolean">
+			<span wicket:id="label"></span>
+			<input type="checkbox" wicket:id="outputValue"/>
+		</wicket:fragment>
+	</wicket:panel>
+</body>
+</html>

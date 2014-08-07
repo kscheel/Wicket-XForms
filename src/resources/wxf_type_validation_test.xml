@@ -1,0 +1,153 @@
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:my="http://example.org"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:ev="http://www.w3.org/2001/xml-events">
+
+	<wxf:head>
+		<model>
+
+			<!-- Typdeklarationen -->
+			<xs:schema targetNamespace="http://example.org">
+				<xs:simpleType name="Currency">
+					<xs:restriction base="xsd:string">
+						<xs:enumeration value="USD" />
+						<xs:enumeration value="EUR" />
+					</xs:restriction>
+				</xs:simpleType>
+
+				<xs:complexType name="Price">
+					<xs:simpleContent>
+						<xs:extension base="xsd:double">
+							<xs:attribute name="currency" type="my:Currency" use="optional" default="USD" />
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:schema>
+
+			<!-- Instanzdaten -->
+			<instance>
+				<data xmlns="http://example.org">
+					<aString>Hello, world!</aString>
+					<simpleType>
+						<price>100.00</price>                   <!-- valide -->
+						<price>abc</price>
+						<price currency="EUR">100.00</price>    <!-- valide -->
+						<price currency="EUR">abc</price>
+					</simpleType>
+					<complexType>
+						<price>100.00</price>                   <!-- valide -->
+						<price>abc</price>
+						<price currency="abc">100.00</price>    <!-- valide, außer auf currency -->
+						<price currency="EUR">abc</price>
+					</complexType>
+				</data>
+			</instance>
+
+
+			<!-- Typ-Verknüpfungen -->
+			<bind nodeset="my:aString" type="xsd:string" />
+			<bind nodeset="my:simpleType/my:price" type="xsd:double" />
+			<bind nodeset="my:complexType/my:price[3]/@currency" type="my:Currency" />
+			<!-- <bind nodeset="my:complexType/my:price" type="my:Price" /> -->
+
+			<bind nodeset="/my:data" type="xsd:string" /> <!-- wird ignoriert, da data Kindknoten hat -->
+
+		</model>
+	</wxf:head>
+
+	<wxf:body>
+
+		<group>
+			<label>simpleTypes</label>
+
+			<group appearance="minimal">
+				<input ref="my:simpleType/my:price[1]">
+					<label>Preis 1</label>
+				</input>
+				<input ref="my:simpleType/my:price[1]/@currency">
+					<label>Währung</label>
+				</input>
+			</group>
+
+			<group appearance="minimal">
+				<input ref="my:simpleType/my:price[2]">
+					<label>Preis 2</label>
+				</input>
+				<input ref="my:simpleType/my:price[2]/@currency">
+					<label>Währung</label>
+				</input>
+			</group>
+
+			<group appearance="minimal">
+				<input ref="my:simpleType/my:price[3]">
+					<label>Preis 3</label>
+				</input>
+				<input ref="my:simpleType/my:price[3]/@currency">
+					<label>Währung</label>
+				</input>
+			</group>
+
+			<group appearance="minimal">
+				<input ref="my:simpleType/my:price[4]">
+					<label>Preis 4</label>
+				</input>
+				<input ref="my:simpleType/my:price[4]/@currency">
+					<label>Währung</label>
+				</input>
+			</group>
+		</group>
+
+		<group>
+			<label>complexTypes</label>
+
+			<group appearance="minimal">
+				<input ref="my:complexType/my:price[1]">
+					<label>Preis 1</label>
+				</input>
+				<input ref="my:complexType/my:price[1]/@currency">
+					<label>Währung</label>
+				</input>
+			</group>
+
+			<group appearance="minimal">
+				<input ref="my:complexType/my:price[2]">
+					<label>Preis 2</label>
+				</input>
+				<input ref="my:complexType/my:price[2]/@currency">
+					<label>Währung</label>
+				</input>
+			</group>
+
+			<group appearance="minimal">
+				<input ref="my:complexType/my:price[3]">
+					<label>Preis 3</label>
+				</input>
+				<input ref="my:complexType/my:price[3]/@currency">
+					<label>Währung</label>
+				</input>
+			</group>
+
+			<group appearance="minimal">
+				<input ref="my:complexType/my:price[4]">
+					<label>Preis 4</label>
+				</input>
+				<input ref="my:complexType/my:price[4]/@currency">
+					<label>Währung</label>
+				</input>
+			</group>
+		</group>
+		
+		<trigger>
+			<label>print Model</label>
+			<wxf:action wxf:id="printModelAction" ev:event="DOMActivate" />
+		</trigger>
+		
+		<trigger>
+			<label>XmlBeans Test</label>
+			<wxf:action wxf:id="beanTest" ev:event="DOMActivate" />
+		</trigger>
+
+	</wxf:body>
+</wxf:wicketxforms>

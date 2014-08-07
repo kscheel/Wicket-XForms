@@ -1,0 +1,68 @@
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2002/xforms http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd
+	http://www.example.org/Wicket-XForms Wicket-XForms.xsd">
+	
+	<wxf:head>
+		<model>
+			<instance>
+				<data xmlns="">
+					<a>5</a>
+					<b>6</b>
+				</data>
+			</instance>
+			
+        	<bind nodeset="a" type="xsd:float" required="true()"/>
+        	<bind nodeset="b" id="bind-b"/>
+
+			<submission resource="http://localhost:1234/" method="put" indent="true" validate="false" id="s01"/>
+			<submission resource="http://localhost:1234/" method="put" indent="true" validate="true" id="s02"/>
+			
+			<submission resource="wxf://wicket-xforms/" replace="none" id="s03"/>
+			<submission resource="wxf://wicket-xforms/" method="wxf" replace="none" validate="false" ref="a" id="s04"/>
+			<submission resource="wxf://wicket-xforms/" method="wxf" replace="none" validate="false" bind="bind-b" id="s05"/>
+		</model>
+	</wxf:head>
+	
+	<wxf:body>
+		
+		<input ref="a">
+			<label> </label>
+		</input>
+		
+		<input ref="b">
+			<label> + </label>
+		</input>
+		
+		<output value="a + b">
+			<label>= </label>
+		</output>
+		
+		<group wxf:style="margin-top:10px;">
+			<submit submission="s01">
+				<label>Submit (validate false)</label>
+			</submit>
+			
+			<submit submission="s02">
+				<label>Submit (validate true)</label>
+			</submit>
+			
+			<submit submission="s03">
+				<label>Submit to Wicket component</label>
+			</submit>
+			
+			<submit submission="s04">
+				<label>Submit just a</label>
+			</submit>
+			
+			<submit submission="s05">
+				<label>Submit just b</label>
+			</submit>
+		</group>
+		
+	</wxf:body>
+</wxf:wicketxforms>

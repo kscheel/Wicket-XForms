@@ -1,0 +1,34 @@
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2002/xforms http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd
+	http://www.example.org/Wicket-XForms Wicket-XForms.xsd">
+	
+	<wxf:head>
+		<model>
+			<instance>
+				<data xmlns="">
+					<zahl1>16</zahl1>
+					<zahl2>26</zahl2>
+					<int />
+					<bool/>
+				</data>
+			</instance>
+			
+        	<bind id="sum" nodeset="int" calculate="/data/zahl1 + /data/zahl2" type="xsd:integer"/>
+        	<bind id="aha" nodeset="bool" type="xsd:boolean"/>
+        	
+		</model>
+	</wxf:head>
+	
+	<wxf:body>
+		
+		<input bind="sum"><label>Summe: </label></input>
+		<input bind="aha"><label>Boolean: </label></input>
+		<input bind="aha"><label>TestLabel &lt;em&gt;mit&lt;/em&gt; &lt;strong&gt;markup&lt;/strong&gt; </label></input>
+		
+	</wxf:body>
+</wxf:wicketxforms>

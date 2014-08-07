@@ -1,0 +1,59 @@
+<project name="Wicket-XForms" default="compile" basedir=".">
+  <description>
+    Wicket-XForms
+  </description>
+  
+  <!-- Genutzte Ordnerpfade -->
+  <property name="src"           location="src"/>
+  <property name="build"         location="build"/>
+  <property name="doc"           location="doc"/>
+  <property name="classpath"     location="WebContent/WEB-INF/lib"/>
+  
+
+  <target name="init" depends="">
+    <mkdir dir="${build}"/>
+    <mkdir dir="${doc}"/>
+  </target>
+  
+  
+  <target name="compile" depends="init"
+          description="compile java sources" >
+    <javac sourcepath ="${src}" srcdir="${src}" destdir="${build}"
+      encoding="UTF-8" failonerror="true" 
+    	includeantruntime="false" debug="true" >
+      <classpath path="${classpath}"/>
+<!--
+      <compilerarg value="-Xlint"/>
+      <compilerarg value="-Xlint:unchecked"/>
+      <compilerarg value="-Xlint:-path"/>
+      <compilerarg value="-Xlint:-serial"/>
+      <compilerarg value="-Werror"/> 
+-->
+    </javac>
+  </target>
+  
+
+  <target name="javadoc"
+          description="create javadoc documentation">
+    <javadoc destdir="${doc}"
+             encoding="UTF-8" docencoding="UTF-8" charset="UTF-8"
+             author="true" use="true" failonerror="true">
+<!--
+      <arg value="-Xwerror" />
+-->
+      <arg value="-quiet" />
+      <fileset dir="${src}" />
+    </javadoc>
+  </target>
+
+
+  <target name="clean" depends="init"
+          description="clean up" >
+          
+    <delete includeemptydirs="true">
+      <fileset dir="${build}" includes="**/*"/>
+      <fileset dir="${doc}" includes="**/*"/>
+    </delete>
+  </target>
+
+</project>

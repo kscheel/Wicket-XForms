@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:my="http://www.example.org/wasd"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2002/xforms http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd
+	                    http://www.w3.org/XML/1998/namespace http://www.w3.org/2001/xml.xsd
+	                    http://www.example.org/Wicket-XForms Wicket-XForms.xsd
+						http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
+	
+	<wxf:head>
+		<model>
+		  <instance>
+		  
+		    <my:lines>
+		      <my:line name="a">
+		        <my:price>3.00</my:price>
+		      </my:line>
+		      <my:line name="b">
+		        <my:price>32.25</my:price>
+		      </my:line>
+		      <my:line name="c">
+		        <my:price>132.99</my:price>
+		      </my:line>
+	      	</my:lines>
+	      	
+		  </instance>
+		</model>
+	</wxf:head>
+	
+	<wxf:body>
+		
+		<repeat id="lineset" nodeset="/my:lines/my:line">
+		  <input ref="my:price">
+		    <label>Line Item</label>
+		  </input>
+		  <input ref="@name">
+		    <label>Name</label>
+		  </input>
+		</repeat>
+		        
+		<trigger>
+		  <label>Insert a new item after the current one</label>
+		  <action ev:event="DOMActivate">
+		    <insert nodeset="/my:lines/my:line" at="index('lineset')" position="after"/>
+		    <setvalue ref="/my:lines/my:line[index('lineset')]/@name"/>
+		    <setvalue ref="/my:lines/my:line[index('lineset')]/price">0.00</setvalue>
+		  </action>  
+		</trigger>
+		          
+		<trigger>
+		  <label>remove current item</label>
+		  <delete ev:event="DOMActivate" nodeset="/my:lines/my:line" at="index('lineset')"/>
+		</trigger>
+		
+	</wxf:body>
+</wxf:wicketxforms>
+
+
+
+

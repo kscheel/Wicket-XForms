@@ -1,0 +1,15 @@
+<data xmlns="http://example.org">
+	<aString>Hello, world!</aString>
+	<simpleType>
+		<price>100.00</price>                   <!-- valide -->
+		<price>abc</price>
+		<price currency="EUR">100.00</price>    <!-- valide -->
+		<price currency="EUR">abc</price>
+	</simpleType>
+	<complexType>
+		<price>100.00</price>                   <!-- valide -->
+		<price>abc</price>
+		<price currency="abc">100.00</price>    <!-- valide, außer auf currency -->
+		<price currency="EUR">abc</price>
+	</complexType>
+</data>

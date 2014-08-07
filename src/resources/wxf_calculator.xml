@@ -1,0 +1,28 @@
+
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2002/xforms http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd
+	                    http://www.example.org/Wicket-XForms Wicket-XForms.xsd">
+	
+	<wxf:head>
+		<model>
+			<instance src="model_instance_calculator.xml"/>
+        	<bind id="sum" nodeset="ergebnis" calculate="/calculator/@zahl1 + /calculator/@zahl2"/>
+		</model>
+	</wxf:head>
+	
+	<wxf:body>
+		<input ref="@zahl1">
+			<label>erste Zahl:</label>
+		</input>
+		
+		<input ref="@zahl2">
+			<label>zweite Zahl:</label>
+		</input>
+
+		<output bind="sum"><label>Summe: </label></output>
+	</wxf:body>
+</wxf:wicketxforms>

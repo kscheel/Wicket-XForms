@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:fn="http://www.w3.org/2005/xpath-functions"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2002/xforms http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd
+	                    http://www.example.org/Wicket-XForms Wicket-XForms.xsd
+						http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
+
+	<wxf:head>
+		<model>
+			<instance src="wxf_demoRepeat_instance.xml" />
+		</model>
+	</wxf:head>
+
+	<wxf:body>
+
+		<repeat nodeset="section" id="repeatSections">
+			<input ref="@name" wxf:class="editField">
+				<label wxf:class="sectionLabel">Section</label>
+			</input>
+
+			<repeat nodeset="bookmark" id="repeatBookmarks">
+				<input ref="@name">
+					<label>Bookmark name</label>
+				</input>
+				<input ref="@href">
+					<label>URL</label>
+				</input>
+			</repeat>
+		</repeat>
+
+		<trigger>
+			<label>Insert bookmark</label>
+			<insert nodeset="section[index('repeatSections')]/bookmark"
+				at="index('repeatBookmarks')" position="after" ev:event="DOMActivate" />
+		</trigger>
+
+		<trigger>
+			<label>Delete bookmark</label>
+			<delete nodeset="section[index('repeatSections')]/bookmark"
+				at="index('repeatBookmarks')" ev:event="DOMActivate" />
+		</trigger>
+
+		<trigger>
+			<label>Insert section</label>
+			<insert nodeset="section" at="index('repeatSections')"
+				position="after" ev:event="DOMActivate" />
+		</trigger>
+
+		<trigger>
+			<label>Delete section</label>
+			<delete nodeset="section" at="index('repeatSections')"
+				ev:event="DOMActivate" />
+		</trigger>
+      
+  </wxf:body>
+</wxf:wicketxforms>

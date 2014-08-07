@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:fn="http://www.w3.org/2005/xpath-functions"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2002/xforms http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd
+	                    http://www.example.org/Wicket-XForms Wicket-XForms.xsd
+						http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
+
+	<wxf:head>
+		<model>
+			<instance>
+				<data xmlns="">
+					<element>value</element>
+					<boolean>true</boolean>
+				</data>
+			</instance>
+			
+			<bind nodeset="boolean" type="xsd:boolean"/>
+		</model>
+	</wxf:head>
+
+	<wxf:body>
+	
+		<group id="demo-group" appearance="full" wxf:style="display:inline-block;">
+			<label>Core-Controls</label>
+			
+			<!-- core control examples -->
+			<group wxf:style="display:flex; justify-content: space-around; align-items: center;">
+			
+				<group wxf:style="display:flex; flex-direction: column;">
+					<input id="demo-input1" wxf:class="demo" ref="element">
+						<label>input</label>
+					</input>
+					
+					<input id="demo-input2" wxf:class="demo" ref="element" incremental="true">
+						<label>input (incremental)</label>
+					</input>
+				
+					<input id="demo-input3" wxf:class="demo" ref="boolean">
+						<label>input (boolean)</label>
+					</input>
+				</group>
+				
+				<group wxf:style="display:flex; flex-direction: column;">
+					<output id="demo-output1" wxf:class="demo" ref="element">
+						<label>output</label>
+					</output>
+					
+					<output id="demo-output2" wxf:class="demo" ref="boolean">
+						<label>output (boolean)</label>
+					</output>
+				</group>
+				
+				<group wxf:style="display:flex; flex-direction: column;">
+					<trigger id="demo-trigger1" wxf:class="demo">
+						<label>trigger</label>
+					</trigger>
+					
+					<trigger id="demo-trigger2" appearance="minimal" wxf:class="demo">
+						<label>trigger (minimal)</label>
+					</trigger>
+				</group>
+			</group>
+			
+			<!-- control state buttons -->
+			
+			<group wxf:style="margin-top:10px; display: flex; justify-content: space-around; align-items: center;">
+				<group wxf:style="display:flex; flex-direction: column; flex: 1;">
+				
+					<trigger wxf:style="flex: 1;">
+						<label>set valid</label>
+						<action ev:event="DOMActivate">
+							<dispatch name="xforms-valid" targetid="demo-input1" />
+							<dispatch name="xforms-valid" targetid="demo-input2" />
+							<dispatch name="xforms-valid" targetid="demo-input3" />
+							<dispatch name="xforms-valid" targetid="demo-output1" />
+							<dispatch name="xforms-valid" targetid="demo-output2" />
+							<dispatch name="xforms-valid" targetid="demo-trigger1"/>
+							<dispatch name="xforms-valid" targetid="demo-trigger2"/>
+							<dispatch name="betterform-state-changed" targetid="demo-group" />
+						</action>
+					</trigger>
+					
+					<trigger wxf:style="flex: 1;">
+						<label>set invalid</label>
+						<action ev:event="DOMActivate">
+							<dispatch name="xforms-invalid" targetid="demo-input1" />
+							<dispatch name="xforms-invalid" targetid="demo-input2" />
+							<dispatch name="xforms-invalid" targetid="demo-input3" />
+							<dispatch name="xforms-invalid" targetid="demo-output1" />
+							<dispatch name="xforms-invalid" targetid="demo-output2" />
+							<dispatch name="xforms-invalid" targetid="demo-trigger1"/>
+							<dispatch name="xforms-invalid" targetid="demo-trigger2"/>
+							<dispatch name="betterform-state-changed" targetid="demo-group" />
+						</action>
+					</trigger>
+				</group>
+				
+				<group wxf:style="display:flex; flex-direction: column; flex: 1;">
+					<trigger wxf:style="flex: 1;">
+						<label>set readwrite</label>
+						<action ev:event="DOMActivate">
+							<dispatch name="xforms-readwrite" targetid="demo-input1" />
+							<dispatch name="xforms-readwrite" targetid="demo-input2" />
+							<dispatch name="xforms-readwrite" targetid="demo-input3" />
+							<dispatch name="xforms-readwrite" targetid="demo-output1" />
+							<dispatch name="xforms-readwrite" targetid="demo-output2" />
+							<dispatch name="xforms-readwrite" targetid="demo-trigger1"/>
+							<dispatch name="xforms-readwrite" targetid="demo-trigger2"/>
+							<dispatch name="betterform-state-changed" targetid="demo-group" />
+						</action>
+					</trigger>
+					
+					<trigger wxf:style="flex: 1;">
+						<label>set readonly</label>
+						<action ev:event="DOMActivate">
+							<dispatch name="xforms-readonly" targetid="demo-input1" />
+							<dispatch name="xforms-readonly" targetid="demo-input2" />
+							<dispatch name="xforms-readonly" targetid="demo-input3" />
+							<dispatch name="xforms-readonly" targetid="demo-output1" />
+							<dispatch name="xforms-readonly" targetid="demo-output2" />
+							<dispatch name="xforms-readonly" targetid="demo-trigger1"/>
+							<dispatch name="xforms-readonly" targetid="demo-trigger2"/>
+							<dispatch name="betterform-state-changed" targetid="demo-group" />
+						</action>
+					</trigger>
+				</group>
+				
+				<group wxf:style="display:flex; flex-direction: column; flex: 1;">
+					<trigger wxf:style="flex: 1;">
+						<label>set optional</label>
+						<action ev:event="DOMActivate">
+							<dispatch name="xforms-optional" targetid="demo-input1" />
+							<dispatch name="xforms-optional" targetid="demo-input2" />
+							<dispatch name="xforms-optional" targetid="demo-input3" />
+							<dispatch name="xforms-optional" targetid="demo-output1" />
+							<dispatch name="xforms-optional" targetid="demo-output2" />
+							<dispatch name="xforms-optional" targetid="demo-trigger1"/>
+							<dispatch name="xforms-optional" targetid="demo-trigger2"/>
+							<dispatch name="betterform-state-changed" targetid="demo-group" />
+						</action>
+					</trigger>
+					
+					<trigger wxf:style="flex: 1;">
+						<label>set required</label>
+						<action ev:event="DOMActivate">
+							<dispatch name="xforms-required" targetid="demo-input1" />
+							<dispatch name="xforms-required" targetid="demo-input2" />
+							<dispatch name="xforms-required" targetid="demo-input3" />
+							<dispatch name="xforms-required" targetid="demo-output1" />
+							<dispatch name="xforms-required" targetid="demo-output2" />
+							<dispatch name="xforms-required" targetid="demo-trigger1"/>
+							<dispatch name="xforms-required" targetid="demo-trigger2"/>
+							<dispatch name="betterform-state-changed" targetid="demo-group" />
+						</action>
+					</trigger>
+				</group>
+				
+				<group wxf:style="display:flex; flex-direction: column; flex: 1;">
+					<trigger wxf:style="flex: 1;">
+						<label>set enabled</label>
+						<action ev:event="DOMActivate">
+							<dispatch name="xforms-enabled" targetid="demo-input1" />
+							<dispatch name="xforms-enabled" targetid="demo-input2" />
+							<dispatch name="xforms-enabled" targetid="demo-input3" />
+							<dispatch name="xforms-enabled" targetid="demo-output1" />
+							<dispatch name="xforms-enabled" targetid="demo-output2" />
+							<dispatch name="xforms-enabled" targetid="demo-trigger1"/>
+							<dispatch name="xforms-enabled" targetid="demo-trigger2"/>
+							<dispatch name="betterform-state-changed" targetid="demo-group" />
+						</action>
+					</trigger>
+					
+					<trigger wxf:style="flex: 1;">
+						<label>set disabled</label>
+						<action ev:event="DOMActivate">
+							<dispatch name="xforms-disabled" targetid="demo-input1" />
+							<dispatch name="xforms-disabled" targetid="demo-input2" />
+							<dispatch name="xforms-disabled" targetid="demo-input3" />
+							<dispatch name="xforms-disabled" targetid="demo-output1" />
+							<dispatch name="xforms-disabled" targetid="demo-output2" />
+							<dispatch name="xforms-disabled" targetid="demo-trigger1"/>
+							<dispatch name="xforms-disabled" targetid="demo-trigger2"/>
+							<dispatch name="betterform-state-changed" targetid="demo-group" />
+						</action>
+					</trigger>
+				</group>
+			</group>
+		</group>
+      
+  </wxf:body>
+</wxf:wicketxforms>

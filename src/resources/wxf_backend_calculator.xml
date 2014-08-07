@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<!-- damit IDs auch als solche behandelt werden... -->
+<!--DOCTYPE WXF [
+	<!ATTLIST trigger id ID #IMPLIED>
+]-->
+
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2002/xforms http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd
+	                    http://www.w3.org/XML/1998/namespace http://www.w3.org/2001/xml.xsd
+	                    http://www.example.org/Wicket-XForms Wicket-XForms.xsd
+						http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
+	
+	<wxf:head>
+<!-- 		<model schema="file:///home/karl/Documents/thesis/wxf_workspace/wicked-XForms/src/resources/schema0.xsd"> -->
+		<model>
+			<instance src="model_instance_calculator.xml"/>
+			
+        	<bind nodeset="@zahl1" type="xsd:float"/>
+        	<bind nodeset="@zahl2" type="xsd:float"/>
+		</model>
+	</wxf:head>
+	
+	<wxf:body>
+			
+		<group wxf:style="display:flex; justify-content: center; align-items: center;">
+		
+		<group appearance="full" id="taschenrechner-group">
+			<label>Taschenrechner</label>
+			
+			<input ref="@zahl1">
+				<label>erste Zahl: </label>
+			</input>
+			
+			<input ref="@zahl2">
+				<label>zweite Zahl: </label>
+			</input>
+	
+			<output ref="ergebnis">
+				<label>Ergebnis: </label>
+			</output>
+		</group>
+
+		<group appearance="full" wxf:style="">
+			<label>Operationen</label>
+			
+			<group wxf:class="flex-vertical">
+					
+				<trigger id="plusBtn" wxf:class="flex-item">
+					<label>Addition</label>
+					<action ev:event="DOMActivate">
+						<wxf:action name="add"/>
+						<refresh/>
+					</action>
+				</trigger>
+		
+				<trigger id="minBtn" wxf:class="flex-item">
+					<label>Subtraktion</label>
+					<action ev:event="DOMActivate">
+						<wxf:action name="subtract"/>
+						<refresh/>
+					</action>
+				</trigger>
+		
+				<trigger wxf:class="flex-item">
+					<label>Multiplikation</label>
+					<action ev:event="DOMActivate">
+						<wxf:action name="multiply"/>
+						<refresh/>
+					</action>
+				</trigger>
+		
+				<trigger wxf:class="flex-item">
+					<label>Division</label>
+					<action ev:event="DOMActivate">
+						<wxf:action name="divide"/>
+						<refresh/>
+					</action>
+				</trigger>
+			</group>
+		</group>
+		
+			</group>
+	</wxf:body>
+</wxf:wicketxforms>

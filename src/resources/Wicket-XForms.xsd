@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ev="http://www.w3.org/2001/xml-events"
+           xmlns:xf="http://www.w3.org/2002/xforms"
+           xmlns:wxf="http://www.example.org/Wicket-XForms"
+           targetNamespace="http://www.example.org/Wicket-XForms"
+           xmlns="http://www.example.org/Wicket-XForms"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <xs:import namespace="http://www.w3.org/2002/xforms"
+    schemaLocation="http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd"/>
+  
+  <xs:import namespace="http://www.w3.org/2001/xml-events"
+    schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xml-events-attribs-1.xsd"/>
+
+  <!-- globales Action-Element -->
+  <xs:element name="action">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:string" use="required"/>
+      <xs:attribute name="model" type="xs:string" use="optional"/>
+      <xs:attribute name="instance" type="xs:string" use="optional"/>
+      <!-- XML-Event Attribute erlauben -->
+      <xs:attributeGroup ref="ev:XmlEvents.attlist"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- root Element -->
+  <xs:element name="wicketxforms">
+    <xs:complexType>
+      <xs:sequence>
+
+        <!-- Head für Teile, die nicht gerendert werden -->
+        <xs:element name="head">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- versch. Elemente in beliebiger Reihenfolge erlauben -->
+              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="action"/>
+                <xs:any namespace="http://www.w3.org/2002/xforms"/>
+              </xs:choice>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <!-- Body für FormControls -->
+        <xs:element name="body">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- beliebige xforms-Elemente erlauben -->
+              <xs:any namespace="http://www.w3.org/2002/xforms ##targetNamespace" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:attribute name="class" type="xs:string"/>
+  <xs:attribute name="style" type="xs:string"/>
+  
+  <xs:attributeGroup name="WicketXForms.attlist">
+    <xs:attribute ref="wxf:class"/>
+    <xs:attribute ref="wxf:style"/>
+  </xs:attributeGroup>
+
+</xs:schema>

@@ -1,0 +1,39 @@
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2002/xforms http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd
+	http://www.example.org/Wicket-XForms Wicket-XForms.xsd">
+	
+	<wxf:head>
+		<model>
+			<instance>
+				<data xmlns="">
+					<zahl1>16</zahl1>
+					<zahl2>26</zahl2>
+				</data>
+			</instance>
+			
+        	<bind nodeset="zahl1" type="xsd:float"/>
+        	<bind nodeset="zahl2" type="xsd:float"/>
+		</model>
+	</wxf:head>
+	
+	<wxf:body>
+		
+		<input ref="zahl1" incremental="true">
+			<label>erste Zahl:</label>
+		</input>
+		
+		<input ref="zahl2" incremental="true">
+			<label>zweite Zahl:</label>
+		</input>
+		
+		<output value="zahl1 + zahl2">
+			<label>Summe:</label>
+		</output>
+		
+	</wxf:body>
+</wxf:wicketxforms>

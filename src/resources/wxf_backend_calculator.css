@@ -1,0 +1,7 @@
+#taschenrechner-group { display:table; }
+#taschenrechner-group > .xf-input { display:table-row; }
+#taschenrechner-group > .xf-output { display:table-row; }
+#taschenrechner-group > * > * { display:table-cell; margin:3px }
+
+.flex-vertical { display: inline-flex; flex-direction: column; }
+.flex-item { flex: 1; }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:my="http://www.example.org/customer"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2002/xforms http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd
+	                    http://www.example.org/Wicket-XForms Wicket-XForms.xsd
+						http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
+
+	<!-- Der head enthaelt Elemente, die nicht zur Benutzeroberfläche gehören -->
+	<wxf:head>
+	
+		<model>
+			<instance>
+				<!-- Initiale Daten -->
+				<my:data>
+					<my:customer name="Egon Egal" unmarried="true">
+						<my:spouse>Ella Egal</my:spouse>
+						<my:email>egon@egal.de</my:email>
+						<my:address city="Stadt" street="Straße" zip="1234"/>
+					</my:customer>
+				</my:data>
+			</instance>
+			
+			<!-- Angabe der Datenübertragunsart -->
+			<submission resource="wxf://wicket-xforms/" method="wxf" validate="true" id="s00" replace="none"/>
+			
+			<!-- Angabe von Datentypen (model item properties) -->
+			<bind nodeset="my:customer/@name"      type="xsd:string" required="true()"/>
+			<bind nodeset="my:customer/@unmarried" type="xsd:boolean" id="unmarriedBinding"/>
+			<bind nodeset="my:customer/my:email"   type="email"/>
+			
+			<bind nodeset="my:customer/my:spouse" relevant="my:customer/@unmarried"/>
+			
+			<bind nodeset="my:customer/my:address/@*" required="true()"/>            <!-- [ alle Adressattribute sind benötigt ] -->
+			<bind nodeset="my:customer/my:address/@zip" type="xsd:positiveInteger"/> <!-- ToDo: 4-5 stellige +Zahl -->
+		</model>
+		
+	</wxf:head>
+	
+	<!-- Im body sind die Elemente für Benutzerinteraktionen -->
+	<wxf:body>
+	
+		<group id="group-kunde">
+			<label>Kunden anlegen</label>
+			
+			<input ref="my:customer/@name">
+				<label>Name</label>
+			</input>
+			
+			<input bind="unmarriedBinding">
+				<label>Ledig</label>
+			</input>
+			
+			<!--
+			<trigger>
+				<label>boom</label>
+				<refresh ev:event="DOMActivate"/>
+			</trigger>
+			
+			<input ref="my:customer/my:spouse">
+				<label>Partner</label>
+			</input>
+			-->
+			
+			<input ref="my:customer/my:email">
+				<label>E-Mail</label>
+			</input>
+			
+			<group appearance="full" ref="my:customer/my:address">
+				<label>Adresse</label>
+			
+				<input ref="@city">
+					<label>Stadt</label>
+				</input>
+			
+				<input ref="@street">
+					<label>Straße</label>
+				</input>
+			
+				<input ref="@zip">
+					<label>Postleitzahl</label>
+				</input>
+			</group>
+			
+			<submit submission="s00">
+				<label>Anlegen</label>
+			</submit>
+		</group>
+      
+	</wxf:body>
+</wxf:wicketxforms>

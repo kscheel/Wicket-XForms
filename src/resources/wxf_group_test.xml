@@ -1,0 +1,150 @@
+<wxf:wicketxforms
+	xmlns="http://www.w3.org/2002/xforms"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:wxf="http://www.example.org/Wicket-XForms"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2002/xforms http://www.w3.org/MarkUp/Forms/2007/XForms-11-Schema.xsd
+	http://www.example.org/Wicket-XForms Wicket-XForms.xsd">
+	
+	<wxf:head>
+		<model>
+			<instance>
+				<data xmlns="" a="5" b="6"/>
+			</instance>
+		</model>
+	</wxf:head>
+	
+	<wxf:body>
+		
+		<group appearance="full">
+			<label>Yo Dawg, ...</label>
+			<group appearance="full">
+				<label>..so I heard you like groups</label>
+				
+				<group appearance="full">
+					<label>normale Gruppierung mit Label</label>
+					
+					<input ref="@a">
+						<label> </label>
+					</input>
+					
+					<input ref="@b">
+						<label> </label>
+					</input>
+					
+					<output value="@a + @b">
+						<label>addiert = </label>
+					</output>
+				</group>
+				
+				<group appearance="full">
+					<input ref="@a">
+						<label> </label>
+					</input>
+					
+					<input ref="@b">
+						<label> </label>
+					</input>
+					
+					<output value="@a - @b">
+						<label> subtrahiert = </label>
+					</output>
+				</group>
+				
+				<group>
+					<label>"minimal"-Gruppierung mit Label</label>
+					
+					<input ref="@a">
+						<label>a:</label>
+					</input>
+					
+					<input ref="@b">
+						<label>b:</label>
+					</input>
+					
+					<output value="@a * @b">
+						<label>multipliziert = </label>
+					</output>
+				</group>
+				
+				<group>
+					
+					<input ref="@a">
+						<label>a:</label>
+					</input>
+					
+					<input ref="@b">
+						<label>b:</label>
+					</input>
+					
+					<output value="@a div @b">
+						<label>dividiert = </label>
+					</output>
+				</group>
+			</group>
+		</group>
+		
+		<group appearance="full" wxf:style="display: inline; margin: 20px;">
+			<label wxf:style="text-shadow:3px 3px 5px #CCC; color: #A7C942;">
+				Layoutgestaltung mit "minimal"-Groups und CSS
+			</label>
+			
+			<group wxf:style="float: left; display: table; margin: 10px;">
+				<group appearance="minimal" wxf:style="display: table-row;">
+					<input wxf:style="display: table-cell;">
+						<label wxf:style="color: blue; display: table-cell;">Label 1</label>
+					</input>
+				</group>
+					
+				<group wxf:style="display: table-row;">
+					<input wxf:style="display: table-cell;">
+						<label wxf:style="color: blue; display: table-cell;">Label 2</label>
+					</input>
+				</group>
+			</group>
+			
+			<group wxf:style="float: left; display: table; margin: 10px;">
+				<group wxf:style="display: table-row;">
+					<input wxf:style="display: table-cell;">
+						<label wxf:style="color: red; display: table-cell;">Label 3</label>
+					</input>
+				</group>
+					
+				<group wxf:style="display: table-row;">
+					<input wxf:style="display: table-cell;">
+						<label wxf:style="color: red; display: table-cell;">Label 4</label>
+					</input>
+				</group>
+			</group>
+		</group>
+		
+		<group>
+			<label>"minimal"-Groups ohne CSS</label>
+			
+			<group>
+				<input>
+					<label wxf:style="color: blue;">Label 1</label>
+				</input>
+				
+				<input>
+					<label wxf:style="color: blue;">Label 2</label>
+				</input>
+			</group>
+			
+			<group>
+				<input>
+					<label wxf:style="color: red;">Label 3</label>
+				</input>
+				
+				<input>
+					<label wxf:style="color: red;">Label 4</label>
+				</input>
+			</group>
+		</group>
+				
+		<output>
+			<label>Test</label>
+		</output>
+		
+	</wxf:body>
+</wxf:wicketxforms>
